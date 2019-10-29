@@ -123,7 +123,9 @@ function getSongs(songName) {
       function getMovieInfo (Movie) {
     //Do i need to declare this value
         var Movie = value;
-    //. get returns the value from the url (differnt from searching )
+    //. get returns the value from the url (differnt from searching ) //check that reset worked for api key
+    // orginal api key indicated that it had been deleted
+    //.env has api key may need to be hiddem
         axios.get("http://www.omdbapi.com/?apikey=9a315c78=" + Movie)
           .then(function (data) {
 //specifying return values   
