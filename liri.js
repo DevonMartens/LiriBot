@@ -3,8 +3,10 @@ require("dotenv").config();
 
 
 // variables
-var command = process.argv[2];
-var argument = process.argv[3];
+var action = process.argv[2];
+var value = process.argv[3];
+
+//requirements
 var request = require('request')
 var keys = require('./keys.js');
 var bandsintown = require('bandsintown')("codingbootcamp");
@@ -12,139 +14,38 @@ var bandsintown = require('bandsintown')("codingbootcamp");
 var moment = require('moment');
 //file system node - work with my computer now
 var fs = require("fs");
+// uses spotify api
 var spotify = require('node-spotify-api');
 var KeysSpotify = new Spotify(keys.spotify);
 
-
-// command functions
-function spotifySong(){
-    if (argument === undefined) {
-        argument = `"
-    }
-    console.log('spotify this song: ' + argument);
-    spotify.search({
-            type: 'track',
-            query: argument,
-            limit: 1,
-        }, function (err, data) {
-            if (err) {
-                console.log('Error occured: ' + err);
-            }
-            music = data.tracks.items[0];
-            console.log(`
-        ${music.name}
-        ${'Album: ' + music.album.name}
-        ${'Artist: ' + music.album.artists[0].name} 
-        ${'Song Sample: ' + music.preview_url}
-                    `, fs.appendFile('log.txt', `
-${music.name}
-Album: ${music.album.name}
-Artist: ${music.album.artists[0].name}
-Song Sample: ${music.preview_url}
-                            `, function (err) {
-                                if (err) throw err
-                                console.log('saved to log.txt!');
-                                },
-
-                        )
-                    )
-                }
-        )
-};
-
-function movieThis(){
-    if (argument === undefined) {
-        argument = `Mr.Nobody`
-    }
-    console.log('movie this: ' + argument);
-    
-    request(`http://www.omdbapi.com/?t=${argument}&y=&plot=short&apikey=trilogy`, function (error, response, body) {
-
-        if (!error && response.statusCode === 200) {
-            console.log(`${JSON.parse(body).Title}
-       ${'Release Year'}: ${JSON.parse(body).Year}
-       ${'IMDB Rating'}: ${JSON.parse(body).imdbRating}
-       ${'Rotten Tomatoes Rating'}: ${JSON.parse(body).Ratings[1].Value}
-       ${'Origin Country'}: ${JSON.parse(body).Country}
-       ${'Available Languages'}: ${JSON.parse(body).Language}
-       ${'Plot'}: ${JSON.parse(body).Plot}
-        ${'Actors'}: ${JSON.parse(body).Actors}`);
-        }
-        fs.appendFile('log.txt', `
-${JSON.parse(body).Title}
-Release Year: ${JSON.parse(body).Year}
-IMDB Rating: ${JSON.parse(body).imdbRating}
-Rotten Tomatoes Rating: ${JSON.parse(body).Ratings[1].Value}
-Origin Country: ${JSON.parse(body).Country}
-Available Languages: ${JSON.parse(body).Language}
-Plot: ${JSON.parse(body).Plot}
-Actors: ${JSON.parse(body).Actors}
-                `, function (err) {
-            if (err) throw err;
-            console.log('Saved to log.txt!');
-        });
-    });
-};
-
-//node liri.js movie-this '<movie name here>'
+var spotify = new Spotify({
+    id: keys.spotify.id,
+    secret: keys.spotify.secret,
+  });
+//var defaults
+var DFMoive = 'Mr. Nobody.'
+var DFSong = "The Sign"
 
 
-//This will output the following information to your terminal/bash window:
-  //* Title of the movie.
-  //* Year the movie came out.
- // * IMDB Rating of the movie.
- // * Rotten Tomatoes Rating of the movie.
-  //* Country where the movie was produced.
-  //* Language of the movie.
-  //* Plot of the movie.
-  //* Actors in the movie.
-// Concert this 
-function concertThis(){
-    bandsintown.getArtistEventList(argument).then(function (events) {
 
-    console.log(`
-    ${'Band: ' + argument}
-    ${'Venue Name: ' + events[0].venue.name}
-    ${'Location: ' + events[1].formatted_location}
-    ${'Date: ' + moment(events[0].datetime).format('L')}`);
-    fs.appendFile('log.txt', `
-${argument}
-Venue Name: ${events[0].venue.name}
-Location: ${events[1].formatted_location}
-Date: ${moment(events[0].datetime).format('L')}
-`,
-
-        function (err) {
-            if (err) throw err;
-            console.log('Saved to log.txt!');
-        });
-});
-};
-
-function doWhatItSays(){
-if (action === "spotify-this-song"){
-    console.log("spotifying: " + whatItSaysArgument);
-    argument = whatItSaysArgument;
-    spotifySong(argument);
-    }       
-};
+//Case and Switch statement (differnt action = run api) based on different condition (node command)
 
 
-// if/then logic tree
 
-if (command === "spotify-this-song") {
-    if (process.argv[3] === undefined) {
-        argument = `"T`
-    }
-    spotifySong();} 
-    else if (command === "movie-this"){
-        movieThis();
-    }
-
-
-    //node liri.js concert-this <artist/band name here>
-   
-		}
-	});          
-
-    }
+//What we need: for concert-this - search the Bands in Town Artist terminal: 
+//api codingbootcamp 
+//Output:
+// Name of the venue
+// Venue location
+//Date of the Event (use moment to format this as "MM/DD/YYYY")
+switch (action) {
+    case "concert-this":
+getConcert (value)
+break;
+// spotify-this-song: spotify api
+//	Artist(s)
+// The song's name
+//	A preview link of the song from Spotify
+//	The album that the song is from
+case "spotify-this-song":
+}

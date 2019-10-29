@@ -8,7 +8,7 @@ The commands for Liri are listed below:
 ♣	Venue location
 ♣	Date of the Event (use moment to format this as "MM/DD/YYYY")
 
-2. node liri.js concert-this spotify-this-song
+2. node liri.js spotify-this-song
 - To use this command you will enter "$ node liri.js spotify-this-song + song name"
 - This command will search the Spotify API and return the following information about he song in your terminal/bash window:
 ♣	Artist(s)
