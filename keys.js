@@ -1,5 +1,5 @@
 
-var env = require('dotenv').config();
+
 console.log('this is loaded');
 
 

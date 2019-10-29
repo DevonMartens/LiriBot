@@ -32,7 +32,7 @@ o	  * Title of the movie.
 
 4. The final command "$ node liri.js do-what-it-says" will 
 o	Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
-♣	It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
+♣	It will run spotify-this-song for "I Want it That Way," and the text in random.txt.
 ♣	A test will be shown for random.txt to test out the feature for movie-this and concert-this.
 
 Please Enjoy this GIF of the app working:

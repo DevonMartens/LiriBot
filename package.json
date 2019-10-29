@@ -19,6 +19,7 @@
   "homepage": "https://github.com/DevonMartens/LiriBot#readme",
   "dependencies": {
     "bit_js": "^3.0.1",
+    "dotenv": "^8.2.0",
     "node-spotify-api": "^1.1.1",
     "omdbapi": "^3.0.0"
   }
